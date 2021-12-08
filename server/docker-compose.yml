@@ -1,16 +1,16 @@
 version: '3.8'
 services:
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: 'python main.py'
-    ports:
-      - 8000:5000
-    volumes:
-      - .:/app
-    depends_on:
-      - db
+  # server:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   command: 'python main.py'
+  #   ports:
+  #     - 8000:5000
+  #   volumes:
+  #     - .:/app
+  #   depends_on:
+  #     - db
 
   db:
     image: mysql/mysql-server:8.0.21
