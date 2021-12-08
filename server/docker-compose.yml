@@ -16,7 +16,7 @@ services:
     image: mysql/mysql-server:8.0.21
     restart: always
     environment:
-      MYSQL_DATABASE: main
+      MYSQL_DATABASE: data-bites
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root

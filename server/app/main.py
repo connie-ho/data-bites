@@ -3,6 +3,11 @@ from flask_mysqldb import MySQL
  
 app = Flask(__name__)
 
+app.config['MYSQL_HOST'] = 'root'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_DB'] = 'data-bites'
+
 mysql = MySQL(app)
  
 @app.route('/')
@@ -24,4 +29,5 @@ def index():
 #         cursor.close()
 #         return f"Done!!"
  
-app.run(host='localhost', port=5000)
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
