@@ -2,3 +2,6 @@
 *.json
 *.csv
 .ipynb_checkpoints
+**/.DS_STORE
+**/env
+**/ece656
