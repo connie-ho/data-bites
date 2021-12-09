@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  server:
+  main:
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,6 +16,7 @@ services:
     image: mysql/mysql-server:8.0.21
     restart: always
     environment:
+      MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_DB: ${MYSQL_DB}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
