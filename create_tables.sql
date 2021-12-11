@@ -21,6 +21,7 @@ SET foreign_key_checks = 1;
 CREATE TABLE Business (
     business_id char(22) NOT NULL,
     name varchar(50) NOT NULL,
+	-- get max length and set it to that
     address varchar(50) NOT NULL,
     city char(20) NOT NULL,
     state char(2) NOT NULL, 
@@ -89,6 +90,7 @@ CREATE TABLE Tips (
     date datetime,
     compliment_count int,
 
+	PRIMARY KEY (business_id, user_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (business_id) REFERENCES Business(business_id)
 );
