@@ -6,7 +6,6 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-
 # Configure db
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')

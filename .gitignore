@@ -1,4 +1,12 @@
 .DS_STORE
+*.json
+*.csv
+.ipynb_checkpoints
+**/.DS_STORE
+**/env
+**/ece656
 /.dbdata
 /env
 .env
+**.dbdata
+server/
