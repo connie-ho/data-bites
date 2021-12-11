@@ -21,7 +21,12 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
     volumes:
-      - .dbdata:/var/lib/mysql
+      - /home/andy/Documents/data-bites/server/data:/var/lib/mysql    
+      - /home/andy/Documents/data-bites/yelp_dataset_csv:/var/lib/mysql-files
+      # - .dbdata:/var/lib/mysql
     ports:
       - 3306:3306
+
+# ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
