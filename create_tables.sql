@@ -24,14 +24,14 @@ CREATE TABLE Business (
 	-- max is 64
     address varchar(110) NOT NULL,
 	-- max is 107
-    city char(40) NOT NULL,
+    city varchar(40) NOT NULL,
 	-- max is 35
     state char(2) NOT NULL, 
 	-- max is 2; there is one incorrect entry with 3 letters
     postal_code char(7) NOT NULL,
 	-- max is 7 with few postal-codes missing all values (missing last number)
-    latitude float NOT NULL,
-    longitude float NOT NULL,
+    latitude decimal(9,6) NOT NULL,
+    longitude decimal(9,6) NOT NULL,
     stars float,
     review_count int,
     is_open BOOLEAN
@@ -63,13 +63,13 @@ CREATE TABLE User (
 
 CREATE TABLE UserElite(
     user_id char(22) NOT NULL,
-    elite int NOT NULL
+    elite int(4) NOT NULL
     -- elite is the year i.e. 2012; 2015
 );
 
 CREATE TABLE UserFriends(
     user_id char(22) NOT NULL,
-    friends char(22) NOT NULL
+    friend_id char(22) NOT NULL
 );
 
 CREATE TABLE Checkin(
@@ -109,6 +109,8 @@ CREATE TABLE Business_Hours (
     Saturday char(11),
     Sunday char(11)
 	-- max is 11
+	-- i.e. 11:0-7:0
+	-- Maybe alter opening / closing time for each day
  );
 
 CREATE TABLE Attributes (
@@ -117,6 +119,7 @@ CREATE TABLE Attributes (
     -- Booleans include true, false and none...
     WiFi char(7),
     -- values like 'no', 'free', 'paid'; max is 7
+	-- Alter table to enum type
     BikeParking BOOLEAN,
     BusinessAcceptsCreditCards BOOLEAN,
     RestaurantsReservations BOOLEAN,
@@ -231,6 +234,12 @@ CREATE TABLE Music (
     video BOOLEAN,
     karaoke BOOLEAN
 );
+
+-- Change this 
+-- BusinessA 3dprinting, atv
+-- businessB atv, active_life, acupuncture
+-- col 1= business; col enum_string
+-- string: "atv, 3d"
 
 CREATE TABLE Categories (
 	business_id char(22) NOT NULL,
