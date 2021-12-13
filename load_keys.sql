@@ -5,7 +5,7 @@ ALTER TABLE User ADD PRIMARY KEY (user_id);
 ALTER TABLE UserElite ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
 
 ALTER TABLE UserFriends ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
-ALTER TABLE UserFriends ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
+ALTER TABLE UserFriends ADD FOREIGN KEY (friends) REFERENCES User(user_id);
 
 ALTER TABLE Checkin ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
