@@ -10,3 +10,8 @@
 .env
 **.dbdata
 server/
+CSV_fix.ipynb
+my.cnf
+mysql-apt-config*
+database/
+.vscode/

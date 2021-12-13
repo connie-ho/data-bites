@@ -20,24 +20,27 @@ SET foreign_key_checks = 1;
 
 CREATE TABLE Business (
     business_id char(22) NOT NULL,
-    name varchar(50) NOT NULL,
-	-- get max length and set it to that
-    address varchar(50) NOT NULL,
-    city char(20) NOT NULL,
+    name varchar(70) NOT NULL,
+	-- max is 64
+    address varchar(110) NOT NULL,
+	-- max is 107
+    city char(40) NOT NULL,
+	-- max is 35
     state char(2) NOT NULL, 
-    postal_code char(20) NOT NULL,
+	-- max is 2; there is one incorrect entry with 3 letters
+    postal_code char(7) NOT NULL,
+	-- max is 7 with few postal-codes missing all values (missing last number)
     latitude float NOT NULL,
     longitude float NOT NULL,
     stars float,
     review_count int,
-    is_open BOOLEAN,
-
-    PRIMARY KEY(business_id)
+    is_open BOOLEAN
 );
 
 CREATE TABLE User (
     user_id char(22) NOT NULL,
-    name varchar(25),
+    name varchar(35),
+	-- max is 32
     review_count int,
     yelping_since datetime,
     useful int,
@@ -55,44 +58,32 @@ CREATE TABLE User (
     compliment_cool int,
     compliment_funny int,
     compliment_writer int,
-    compliment_photos int,
-
-    PRIMARY KEY(user_id)
+    compliment_photos int
 );
 
 CREATE TABLE UserElite(
     user_id char(22) NOT NULL,
-    elite int NOT NULL,
+    elite int NOT NULL
     -- elite is the year i.e. 2012; 2015
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 CREATE TABLE UserFriends(
     user_id char(22) NOT NULL,
-    friends char(22) NOT NULL,
-
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (friends) REFERENCES User(user_id)
+    friends char(22) NOT NULL
 );
 
 CREATE TABLE Checkin(
     business_id char(22) NOT NULL,
-    date datetime NOT NULL,
-
-    FOREIGN KEY (business_id) REFERENCES Business(business_id)
+    date datetime NOT NULL
 );
 
 CREATE TABLE Tips (
     business_id char(22) NOT NULL,
     user_id char(22) NOT NULL,
-    text varchar(255),
-    -- didn't check what the max char should be
+    text varchar(500),
+    -- max is 500
     date datetime,
-    compliment_count int,
-
-	PRIMARY KEY (business_id, user_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id)
+    compliment_count int
 );
 
 CREATE TABLE Reviews (
@@ -103,35 +94,29 @@ CREATE TABLE Reviews (
     useful int, 
     funny int,
     cool int,
-    text varchar(500),
-    -- didnt check what the max char should be
-    date datetime,
-
-    PRIMARY KEY (review_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    text varchar(5000),
+    -- max is 5000
+    date datetime
 );
 
 CREATE TABLE Business_Hours (
-    business_id char(22) NOT NULL,
-    Monday char(12),
-    Tuesday char(12),
-    Wednesday char(12),
-    Thursday char(12),
-    Friday char(12),
-    Saturday char(12),
-    Sunday char(12),
-
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id)
-);
+    business_id char(11) NOT NULL,
+    Monday char(11),
+    Tuesday char(11),
+    Wednesday char(11),
+    Thursday char(11),
+    Friday char(11),
+    Saturday char(11),
+    Sunday char(11)
+	-- max is 11
+ );
 
 CREATE TABLE Attributes (
     business_id char(22) NOT NULL,
     RestaurantsTableService BOOLEAN,
     -- Booleans include true, false and none...
-    WiFi char(4),
-    -- values like 'no', 'free', 'paid'
+    WiFi char(7),
+    -- values like 'no', 'free', 'paid'; max is 7
     BikeParking BOOLEAN,
     BusinessAcceptsCreditCards BOOLEAN,
     RestaurantsReservations BOOLEAN,
@@ -143,12 +128,14 @@ CREATE TABLE Attributes (
     BusinessAcceptsBitcoin BOOLEAN,
     RestaurantsPriceRange2 int,
     HasTV BOOLEAN,
-    Alcohol char(25),
-    -- values like beer_and_wine, none, full_bar
+    Alcohol char(16),
+    -- values like beer_and_wine, none, full_bar; max is 16
     DogsAllowed BOOLEAN,
     RestaurantsTakeOut BOOLEAN,
-    NoiseLevel char(25),
-    RestaurantsAttire char(25),
+    NoiseLevel char(12),
+	-- max is 12
+    RestaurantsAttire char(9),
+	-- max is 9
     RestaurantsDelivery BOOLEAN,
     -- includes T_F_None...
     GoodForKids BOOLEAN,
@@ -158,16 +145,14 @@ CREATE TABLE Attributes (
     BYOB BOOLEAN,
     CoatCheck BOOLEAN,
     Smoking char(10),
-    -- yes, no, outdoor
+    -- yes, no, outdoor; max is 10
     DriveThru BOOLEAN,
     BYOBCorkage BOOLEAN,
     Corkage BOOLEAN,
     RestaurantsCounterService BOOLEAN,
-    AgesAllowed char(7),
-    Open24Hours  BOOLEAN,
-
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id)
+    AgesAllowed char(10),
+	-- max is 10
+    Open24Hours BOOLEAN
 );
 
 CREATE TABLE Ambience (
@@ -180,10 +165,7 @@ CREATE TABLE Ambience (
     trendy BOOLEAN,
     upscale BOOLEAN,
     classy BOOLEAN,
-    casual BOOLEAN,
-
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id)    
+    casual BOOLEAN
 );
 
 CREATE TABLE BestNights (
@@ -194,10 +176,7 @@ CREATE TABLE BestNights (
     wednesday BOOLEAN,
     thursday BOOLEAN,
     sunday BOOLEAN,
-    saturday BOOLEAN,
-
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
+    saturday BOOLEAN
 );
 
 CREATE TABLE BusinessParking (
@@ -206,10 +185,7 @@ CREATE TABLE BusinessParking (
     street BOOLEAN,
     validated BOOLEAN,
     lot BOOLEAN,
-    valet BOOLEAN,
-    
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
+    valet BOOLEAN
 );
 
 CREATE TABLE DietaryRestrictions (
@@ -220,10 +196,7 @@ CREATE TABLE DietaryRestrictions (
     kosher BOOLEAN,
     halal BOOLEAN,
     soy_free BOOLEAN,
-    vegetarian BOOLEAN,
-    
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
+    vegetarian BOOLEAN
 );
 
 CREATE TABLE GoodForMeal (
@@ -233,10 +206,7 @@ CREATE TABLE GoodForMeal (
     lunch BOOLEAN,
     dinner BOOLEAN,
     brunch BOOLEAN,
-    breakfast BOOLEAN,
-    
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
+    breakfast BOOLEAN
 );
 
 CREATE TABLE HairSpecializesIn (
@@ -248,10 +218,7 @@ CREATE TABLE HairSpecializesIn (
     curly BOOLEAN,
     kids BOOLEAN,
     perms BOOLEAN,
-    asian BOOLEAN,
-    
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
+    asian BOOLEAN
 );
 
 CREATE TABLE Music (
@@ -262,10 +229,7 @@ CREATE TABLE Music (
     jukebox BOOLEAN,
     live BOOLEAN,
     video BOOLEAN,
-    karaoke BOOLEAN,
-    
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
+    karaoke BOOLEAN
 );
 
 CREATE TABLE Categories (
@@ -1255,8 +1219,5 @@ CREATE TABLE Categories (
 	Psychic_Mediums BOOLEAN,
 	Psychics BOOLEAN,
 	Psychologists BOOLEAN,
-	Pub_Food BOOLEAN,
-
-    PRIMARY KEY (business_id),
-    FOREIGN KEY (business_id) REFERENCES Business(business_id) 
-)
+	Pub_Food BOOLEAN
+);
