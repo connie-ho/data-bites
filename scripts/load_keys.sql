@@ -40,6 +40,8 @@ DELETE FROM Business_Hours WHERE business_id NOT IN (SELECT business_id from Bus
 ALTER TABLE Business_Hours ADD PRIMARY KEY (business_id);
 ALTER TABLE Business_Hours ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
+-- MAKE ALL OF THESE LIKE USER FRIENDS AND THEN ENUM
+
 DELETE FROM Attributes WHERE business_id NOT IN (SELECT business_id from Business);
 ALTER TABLE Attributes ADD PRIMARY KEY (business_id);
 ALTER TABLE Attributes ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);

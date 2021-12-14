@@ -41,9 +41,9 @@ CREATE TABLE User (
     user_id char(22) NOT NULL,
     name varchar(35),
 	-- max is 32
-    review_count int,
+    review_count int, -- if review count is small, then drop column, if it is large, then leave
     yelping_since datetime,
-    useful int,
+    useful int, -- same for all the tags
     funny int,
     cool int, 
     fans int,
@@ -61,13 +61,13 @@ CREATE TABLE User (
     compliment_photos int
 );
 
-CREATE TABLE UserElite(
+CREATE TABLE User_Elite(
     user_id char(22) NOT NULL,
     elite int(4) NOT NULL
     -- elite is the year i.e. 2012; 2015
 );
 
-CREATE TABLE UserFriends(
+CREATE TABLE User_Friends(
     user_id char(22) NOT NULL,
     friend_id char(22) NOT NULL
 );
@@ -83,8 +83,14 @@ CREATE TABLE Tips (
     text varchar(500),
     -- max is 500
     date datetime,
-    compliment_count int
+    compliment_count int -- remove if number is small
 );
+
+CREATE TABLE Tip_Compliments(
+    user_id char(22) NOT NULL,
+    business_id char(22) NOT NULL,
+    complimenter_id char(22) NOT NULL -- populate with fake user 22x0s
+)
 
 CREATE TABLE Reviews (
     review_id char(22) NOT NULL,
@@ -116,6 +122,10 @@ CREATE TABLE Business_Hours (
 -- attributes=lowercase ask on Tuesday
 CREATE TABLE Attributes (
     business_id char(22) NOT NULL,
+    -- 
+    -- attributes column that has all of these
+    -- Split boolean and non boolean values
+    -- non-boolean attributes (simple vs something) this is csv files
     RestaurantsTableService BOOLEAN,
     -- Booleans include true, false and none...
     WiFi char(7),
@@ -159,6 +169,18 @@ CREATE TABLE Attributes (
     Open24Hours BOOLEAN
 );
 
+CREATE TABLE Restaurants ( -- make into rows with these attributes as enums
+    business_id char(22) NOT NULL
+    table_service BOOLEAN,
+    reservations BOOLEAN,
+    good_for_groups BOOLEAN, 
+    price_range BOOLEAN,
+    takeout BOOLEAN,
+    attire BOOLEAN,
+    delivery BOOLEAN,
+    counter_service BOOLEAN
+);
+
 CREATE TABLE Ambience (
     business_id char(22) NOT NULL,
     touristy BOOLEAN,
@@ -172,7 +194,7 @@ CREATE TABLE Ambience (
     casual BOOLEAN
 );
 
-CREATE TABLE BestNights (
+CREATE TABLE Best_Nights (
     business_id char(22) NOT NULL,
     monday BOOLEAN,
     tuesday BOOLEAN,
@@ -183,7 +205,7 @@ CREATE TABLE BestNights (
     saturday BOOLEAN
 );
 
-CREATE TABLE BusinessParking (
+CREATE TABLE Business_Parking (
     business_id char(22) NOT NULL,
     garage BOOLEAN,
     street BOOLEAN,
@@ -192,7 +214,7 @@ CREATE TABLE BusinessParking (
     valet BOOLEAN
 );
 
-CREATE TABLE DietaryRestrictions (
+CREATE TABLE Dietary_Restrictions (
     business_id char(22) NOT NULL,
     dairy_free BOOLEAN,
     gluten_free BOOLEAN,
@@ -203,7 +225,7 @@ CREATE TABLE DietaryRestrictions (
     vegetarian BOOLEAN
 );
 
-CREATE TABLE GoodForMeal (
+CREATE TABLE Good_For_Meal (
     business_id char(22) NOT NULL,
     dessert BOOLEAN,
     latenight BOOLEAN,
@@ -213,7 +235,7 @@ CREATE TABLE GoodForMeal (
     breakfast BOOLEAN
 );
 
-CREATE TABLE HairSpecializesIn (
+CREATE TABLE Hair_Specializes_In (
     business_id char(22) NOT NULL,
     straightperms BOOLEAN,
     coloring BOOLEAN,
