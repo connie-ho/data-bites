@@ -22,10 +22,8 @@ IGNORE 1 LINES
     longitude,
     stars,
     review_count,
-    @is_open
-)
-SET is_open = IF(@is_open = 'True',1,0)
-;
+    is_open
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create User' as '';
@@ -463,3 +461,19 @@ SET
 	video = IF(@video='True',1,0),
 	karaoke = IF(@karaoke='True',1,0)
 ;
+
+select '---------------------------------------------------------------------------------------' as '';
+select 'Create Categories' as '';
+
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_categories_raw.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_categories_raw.csv' 
+IGNORE
+INTO TABLE Categories
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(
+    business_id,
+    categories
+);
