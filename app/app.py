@@ -9,6 +9,18 @@ from werkzeug.security import check_password_hash, generate_password_hash
 load_dotenv()
 
 app = Flask(__name__)
+
+# Ensure templates are auto-reloaded
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+# Ensure responses aren't cached
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
+
 # Configure db
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
@@ -32,8 +44,8 @@ def create_account():
         cursor.execute("INSERT INTO users(name, email) VALUES(%s, %s)",(name, email))
         mysql.connection.commit()
         cursor.close()
-        return redirect('/users')
-    return render_template('index.html')
+        return redirect('/')
+    return render_template('create-account.html')
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
@@ -43,7 +55,6 @@ def search():
         location = request.form.get("location")
         city = ""
         state = "" 
-        print(location)
         if location:
             location_arr = location.split(", ")
             city = location_arr[0]
@@ -91,27 +102,44 @@ def search():
         res = cursor.execute(query, values)
         if res > 0:
             businesses = cursor.fetchall()
-            print(businesses)
-            return render_template('businesses.html', businesses=businesses)
+            cursor.close()
+            return render_template('search-results.html', businesses=businesses)
         else: 
+            cursor.close()
             return 'No Results'
 
     return render_template('search.html')
 
 
-@app.route('/{business_id}')
-def business_id():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT * FROM users")
-    if resultValue > 0:
-        userDetails = cur.fetchall()
-        return render_template('users.html',userDetails=userDetails)
+@app.route('/<business_id>')
+def business(business_id):
+    cursor = mysql.connection.cursor()
+    #TODO: display all business attributes by joining tables
+    query = """
+    SELECT * FROM Business
+    LEFT JOIN Reviews USING(business_id) 
+    WHERE business_id=%s"""
+    res = cursor.execute(query,[business_id])
+    if res > 0:
+        columns = cursor.description
+        business_details = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+        cursor.close()
+        return render_template('business.html', business_details=business_details[0])
+    else: 
+        cursor.close()
+        return 'Sorry there was an error'
 
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
         e = InternalServerError()
     return 'Error'
+
+@app.route('/<business_id>/review', methods=["GET", "POST"])
+def review(business_id):
+    if request.method == "POST":
+        pass
+    return render_template('review.html', business_id=business_id)
 
 # Listen for errors
 for code in default_exceptions:
