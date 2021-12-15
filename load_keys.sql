@@ -41,13 +41,11 @@ ALTER TABLE Business_Hours ADD PRIMARY KEY (business_id);
 ALTER TABLE Business_Hours ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Attributes WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Attributes ADD PRIMARY KEY (business_id);
 ALTER TABLE Attributes ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Ambience WHERE business_id NOT IN (SELECT business_id from Business);
 ALTER TABLE Ambience ADD PRIMARY KEY (business_id);
 ALTER TABLE Ambience ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
-
 
 DELETE FROM BestNights WHERE business_id NOT IN (SELECT business_id from Business);
 ALTER TABLE BestNights ADD PRIMARY KEY (business_id);
@@ -74,5 +72,4 @@ ALTER TABLE Music ADD PRIMARY KEY (business_id);
 ALTER TABLE Music ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Categories WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Categories ADD PRIMARY KEY (business_id);
 ALTER TABLE Categories ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);

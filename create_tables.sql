@@ -116,47 +116,8 @@ CREATE TABLE Business_Hours (
 -- attributes=lowercase ask on Tuesday
 CREATE TABLE Attributes (
     business_id char(22) NOT NULL,
-    RestaurantsTableService BOOLEAN,
-    -- Booleans include true, false and none...
-    WiFi char(7),
-    -- values like 'no', 'free', 'paid'; max is 7
-	-- Alter table to enum type
-    BikeParking BOOLEAN,
-    BusinessAcceptsCreditCards BOOLEAN,
-    RestaurantsReservations BOOLEAN,
-    WheelchairAccessible BOOLEAN,
-    Caters BOOLEAN,
-    OutdoorSeating BOOLEAN,
-    RestaurantsGoodForGroups BOOLEAN,
-    HappyHour BOOLEAN,
-    BusinessAcceptsBitcoin BOOLEAN,
-    RestaurantsPriceRange2 int,
-    HasTV BOOLEAN,
-    Alcohol char(16),
-    -- values like beer_and_wine, none, full_bar; max is 16
-    DogsAllowed BOOLEAN,
-    RestaurantsTakeOut BOOLEAN,
-    NoiseLevel char(12),
-	-- max is 12
-    RestaurantsAttire char(9),
-	-- max is 9
-    RestaurantsDelivery BOOLEAN,
-    -- includes T_F_None...
-    GoodForKids BOOLEAN,
-    ByAppointmentOnly BOOLEAN,
-    AcceptsInsurance BOOLEAN,
-    GoodForDancing BOOLEAN,
-    BYOB BOOLEAN,
-    CoatCheck BOOLEAN,
-    Smoking char(10),
-    -- yes, no, outdoor; max is 10
-    DriveThru BOOLEAN,
-    BYOBCorkage BOOLEAN,
-    Corkage BOOLEAN,
-    RestaurantsCounterService BOOLEAN,
-    AgesAllowed char(10),
-	-- max is 10
-    Open24Hours BOOLEAN
+    attribute char(30) NOT NULL
+    -- max is 27
 );
 
 CREATE TABLE Ambience (
