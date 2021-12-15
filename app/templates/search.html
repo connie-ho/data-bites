@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search For A Business By:
+{% endblock %}
+
+{% block main %}
+<form method="POST" action="">
+    <div class="pt-3">
+        Name <input type="text" name="name" />
+    </div>
+    <div class="pt-3">
+        Location <input type="text" placeholder="city, state abbreviation" name="location" />
+    </div>
+    <div class="pt-3">
+        Categories <input type="text" name="category" />
+    </div>
+    <div class="pt-3" >
+        <input type="submit">
+    </div>
+</form>
+{% endblock %}

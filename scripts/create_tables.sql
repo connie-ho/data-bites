@@ -41,9 +41,9 @@ CREATE TABLE User (
     user_id char(22) NOT NULL,
     name varchar(35),
 	-- max is 32
-    review_count int,
+    review_count int, -- if review count is small, then drop column, if it is large, then leave
     yelping_since datetime,
-    useful int,
+    useful int, -- same for all the tags
     funny int,
     cool int, 
     fans int,
@@ -83,8 +83,14 @@ CREATE TABLE Tips (
     text varchar(500),
     -- max is 500
     date datetime,
-    compliment_count int
+    compliment_count int -- remove if number is small
 );
+
+CREATE TABLE Tip_Compliments(
+    user_id char(22) NOT NULL,
+    business_id char(22) NOT NULL,
+    complimenter_id char(22) NOT NULL -- populate with fake user 22x0s
+)
 
 CREATE TABLE Reviews (
     review_id char(22) NOT NULL,
@@ -118,6 +124,18 @@ CREATE TABLE Attributes (
     business_id char(22) NOT NULL,
     attribute char(30) NOT NULL
     -- max is 27
+);
+
+CREATE TABLE Restaurants ( -- make into rows with these attributes as enums
+    business_id char(22) NOT NULL
+    table_service BOOLEAN,
+    reservations BOOLEAN,
+    good_for_groups BOOLEAN, 
+    price_range BOOLEAN,
+    takeout BOOLEAN,
+    attire BOOLEAN,
+    delivery BOOLEAN,
+    counter_service BOOLEAN
 );
 
 CREATE TABLE Ambience (
