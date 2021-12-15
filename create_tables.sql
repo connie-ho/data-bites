@@ -1,10 +1,10 @@
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS Ambience;
-DROP TABLE IF EXISTS BestNights;
-DROP TABLE IF EXISTS BusinessParking;
-DROP TABLE IF EXISTS DietaryRestrictions;
-DROP TABLE IF EXISTS GoodForMeal;
-DROP TABLE IF EXISTS HairSpecializesIn;
+DROP TABLE IF EXISTS Best_Nights;
+DROP TABLE IF EXISTS Business_Parking;
+DROP TABLE IF EXISTS Dietary_Restrictions;
+DROP TABLE IF EXISTS Good_For_Meal;
+DROP TABLE IF EXISTS Hair_Specializes_In;
 DROP TABLE IF EXISTS Music;
 DROP TABLE IF EXISTS Attributes;
 DROP TABLE IF EXISTS Categories;
@@ -13,9 +13,9 @@ DROP TABLE IF EXISTS Business;
 DROP TABLE IF EXISTS Checkin;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
-DROP TABLE IF EXISTS UserFriends;
+DROP TABLE IF EXISTS User_Friends;
 DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS UserElite;
+DROP TABLE IF EXISTS User_Elite;
 SET foreign_key_checks = 1;
 
 CREATE TABLE Business (
@@ -61,13 +61,13 @@ CREATE TABLE User (
     compliment_photos int
 );
 
-CREATE TABLE UserElite(
+CREATE TABLE User_Elite(
     user_id char(22) NOT NULL,
     elite int(4) NOT NULL
     -- elite is the year i.e. 2012; 2015
 );
 
-CREATE TABLE UserFriends(
+CREATE TABLE User_Friends(
     user_id char(22) NOT NULL,
     friend_id char(22) NOT NULL
 );
@@ -133,7 +133,7 @@ CREATE TABLE Ambience (
     casual BOOLEAN
 );
 
-CREATE TABLE BestNights (
+CREATE TABLE Best_Nights (
     business_id char(22) NOT NULL,
     monday BOOLEAN,
     tuesday BOOLEAN,
@@ -144,7 +144,7 @@ CREATE TABLE BestNights (
     saturday BOOLEAN
 );
 
-CREATE TABLE BusinessParking (
+CREATE TABLE Business_Parking (
     business_id char(22) NOT NULL,
     garage BOOLEAN,
     street BOOLEAN,
@@ -153,7 +153,7 @@ CREATE TABLE BusinessParking (
     valet BOOLEAN
 );
 
-CREATE TABLE DietaryRestrictions (
+CREATE TABLE Dietary_Restrictions (
     business_id char(22) NOT NULL,
     dairy_free BOOLEAN,
     gluten_free BOOLEAN,
@@ -164,7 +164,7 @@ CREATE TABLE DietaryRestrictions (
     vegetarian BOOLEAN
 );
 
-CREATE TABLE GoodForMeal (
+CREATE TABLE Good_For_Meal (
     business_id char(22) NOT NULL,
     dessert BOOLEAN,
     latenight BOOLEAN,
@@ -174,7 +174,7 @@ CREATE TABLE GoodForMeal (
     breakfast BOOLEAN
 );
 
-CREATE TABLE HairSpecializesIn (
+CREATE TABLE Hair_Specializes_In (
     business_id char(22) NOT NULL,
     straightperms BOOLEAN,
     coloring BOOLEAN,

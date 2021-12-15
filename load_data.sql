@@ -66,7 +66,7 @@ select 'Create UserElite' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user_elite.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_user_elite.csv' 
 IGNORE
-INTO TABLE UserElite
+INTO TABLE User_Elite
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -82,7 +82,7 @@ select 'Create UserFriends' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user_friends.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_user_friends.csv' 
 IGNORE
-INTO TABLE UserFriends
+INTO TABLE User_Friends
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -259,7 +259,7 @@ select 'Create BusinessParking' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_BusinessParking.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_BusinessParking.csv' 
 IGNORE
-INTO TABLE BusinessParking
+INTO TABLE Business_Parking
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -286,7 +286,7 @@ select 'Create DietaryRestrictions' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_DietaryRestrictions.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_DietaryRestrictions.csv' 
 IGNORE
-INTO TABLE DietaryRestrictions
+INTO TABLE Dietary_Restrictions
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -318,7 +318,7 @@ select 'Create GoodForMeal' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
 IGNORE
-INTO TABLE GoodForMeal
+INTO TABLE Good_For_Meal
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -347,7 +347,7 @@ select 'Create HairSpecializesIn' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_HairSpecializesIn.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_HairSpecializesIn.csv' 
 IGNORE
-INTO TABLE HairSpecializesIn
+INTO TABLE Hair_Specializes_In
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
