@@ -1,10 +1,10 @@
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS Ambience;
-DROP TABLE IF EXISTS BestNights;
-DROP TABLE IF EXISTS BusinessParking;
-DROP TABLE IF EXISTS DietaryRestrictions;
-DROP TABLE IF EXISTS GoodForMeal;
-DROP TABLE IF EXISTS HairSpecializesIn;
+DROP TABLE IF EXISTS Best_Nights;
+DROP TABLE IF EXISTS Business_Parking;
+DROP TABLE IF EXISTS Dietary_Restrictions;
+DROP TABLE IF EXISTS Good_For_Meal;
+DROP TABLE IF EXISTS Hair_Specializes_In;
 DROP TABLE IF EXISTS Music;
 DROP TABLE IF EXISTS Attributes;
 DROP TABLE IF EXISTS Categories;
@@ -13,9 +13,9 @@ DROP TABLE IF EXISTS Business;
 DROP TABLE IF EXISTS Checkin;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
-DROP TABLE IF EXISTS UserFriends;
+DROP TABLE IF EXISTS User_Friends;
 DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS UserElite;
+DROP TABLE IF EXISTS User_Elite;
 SET foreign_key_checks = 1;
 
 CREATE TABLE Business (
@@ -122,51 +122,8 @@ CREATE TABLE Business_Hours (
 -- attributes=lowercase ask on Tuesday
 CREATE TABLE Attributes (
     business_id char(22) NOT NULL,
-    -- 
-    -- attributes column that has all of these
-    -- Split boolean and non boolean values
-    -- non-boolean attributes (simple vs something) this is csv files
-    RestaurantsTableService BOOLEAN,
-    -- Booleans include true, false and none...
-    WiFi char(7),
-    -- values like 'no', 'free', 'paid'; max is 7
-	-- Alter table to enum type
-    BikeParking BOOLEAN,
-    BusinessAcceptsCreditCards BOOLEAN,
-    RestaurantsReservations BOOLEAN,
-    WheelchairAccessible BOOLEAN,
-    Caters BOOLEAN,
-    OutdoorSeating BOOLEAN,
-    RestaurantsGoodForGroups BOOLEAN,
-    HappyHour BOOLEAN,
-    BusinessAcceptsBitcoin BOOLEAN,
-    RestaurantsPriceRange2 int,
-    HasTV BOOLEAN,
-    Alcohol char(16),
-    -- values like beer_and_wine, none, full_bar; max is 16
-    DogsAllowed BOOLEAN,
-    RestaurantsTakeOut BOOLEAN,
-    NoiseLevel char(12),
-	-- max is 12
-    RestaurantsAttire char(9),
-	-- max is 9
-    RestaurantsDelivery BOOLEAN,
-    -- includes T_F_None...
-    GoodForKids BOOLEAN,
-    ByAppointmentOnly BOOLEAN,
-    AcceptsInsurance BOOLEAN,
-    GoodForDancing BOOLEAN,
-    BYOB BOOLEAN,
-    CoatCheck BOOLEAN,
-    Smoking char(10),
-    -- yes, no, outdoor; max is 10
-    DriveThru BOOLEAN,
-    BYOBCorkage BOOLEAN,
-    Corkage BOOLEAN,
-    RestaurantsCounterService BOOLEAN,
-    AgesAllowed char(10),
-	-- max is 10
-    Open24Hours BOOLEAN
+    attribute char(30) NOT NULL
+    -- max is 27
 );
 
 CREATE TABLE Restaurants ( -- make into rows with these attributes as enums

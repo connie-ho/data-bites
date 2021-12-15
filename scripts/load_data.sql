@@ -66,7 +66,7 @@ select 'Create UserElite' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user_elite.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_user_elite.csv' 
 IGNORE
-INTO TABLE UserElite
+INTO TABLE User_Elite
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -82,7 +82,7 @@ select 'Create UserFriends' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user_friends.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_user_friends.csv' 
 IGNORE
-INTO TABLE UserFriends
+INTO TABLE User_Friends
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -176,7 +176,7 @@ select '------------------------------------------------------------------------
 select 'Create Attributes' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_attributes.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_exploded.csv' 
 IGNORE
 INTO TABLE Attributes
 FIELDS TERMINATED BY ','
@@ -185,65 +185,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @RestaurantsTableService,
-    WiFi,
-    @BikeParking,
-    @BusinessAcceptsCreditCards,
-    @RestaurantsReservations,
-    @WheelchairAccessible,
-    @Caters,
-    @OutdoorSeating,
-    @RestaurantsGoodForGroups,
-    @HappyHour,
-    @BusinessAcceptsBitcoin,
-    RestaurantsPriceRange2,
-    @HasTV,
-    Alcohol,
-    @DogsAllowed,
-    @RestaurantsTakeOut,
-    NoiseLevel,
-    RestaurantsAttire,
-    @RestaurantsDelivery,
-    @GoodForKids,
-    @ByAppointmentOnly,
-    @AcceptsInsurance,
-    @GoodForDancing,
-    @BYOB,
-    @CoatCheck,
-    Smoking,
-    @DriveThru,
-    @BYOBCorkage,
-    @Corkage,
-    @RestaurantsCounterService,
-    AgesAllowed,
-    @Open24Hours
-)
-SET RestaurantsTableService = IF(@RestaurantsTableService = 'True',1,0),
-    BikeParking = IF(@BikeParking='True', 1,0),
-    BusinessAcceptsCreditCards = IF(@BusinessAcceptsCreditCards='True',1,0),
-    RestaurantsReservations = IF(@RestaurantsReservations='True',1,0),
-    WheelchairAccessible = IF(@WheelchairAccessible='True',1,0),
-    Caters = IF(@Caters='True',1,0),
-    OutdoorSeating = IF(@OutdoorSeating='True',1,0),
-    RestaurantsGoodForGroups = IF(@RestaurantsGoodForGroups='True',1,0),
-    HappyHour = IF(@HappyHour='True',1,0),
-    BusinessAcceptsBitcoin = IF(@BusinessAcceptsBitcoin='True',1,0),
-    HasTV = IF(@HasTV='True',1,0),
-    DogsAllowed = IF(@DogsAllowed='True',1,0),
-    RestaurantsTakeOut = IF(@RestaurantsTakeOut='True',1,0),
-    RestaurantsDelivery = IF(@RestaurantsDelivery='True',1,0),
-    GoodForKids = IF(@GoodForKids='True',1,0),
-    ByAppointmentOnly = IF(@ByAppointmentOnly='True',1,0),
-    AcceptsInsurance = IF(@AcceptsInsurance='True',1,0),
-    GoodForDancing = IF(@GoodForDancing='True',1,0),
-    BYOB = IF(@BYOB='True',1,0),
-    CoatCheck = IF(@CoatCheck='True',1,0),
-    DriveThru = IF(@DriveThru='True',1,0),
-    BYOBCorkage = IF(@BYOBCorkage='True',1,0),
-    Corkage = IF(@Corkage='True',1,0),
-    RestaurantsCounterService = IF(@RestaurantsCounterService='True',1,0),
-    Open24Hours = IF(@Open24Hours='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create Ambience' as '';
@@ -316,7 +259,7 @@ select 'Create BusinessParking' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_BusinessParking.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_BusinessParking.csv' 
 IGNORE
-INTO TABLE BusinessParking
+INTO TABLE Business_Parking
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -343,7 +286,7 @@ select 'Create DietaryRestrictions' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_DietaryRestrictions.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_DietaryRestrictions.csv' 
 IGNORE
-INTO TABLE DietaryRestrictions
+INTO TABLE Dietary_Restrictions
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -375,7 +318,7 @@ select 'Create GoodForMeal' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
 IGNORE
-INTO TABLE GoodForMeal
+INTO TABLE Good_For_Meal
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -404,7 +347,7 @@ select 'Create HairSpecializesIn' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_HairSpecializesIn.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_HairSpecializesIn.csv' 
 IGNORE
-INTO TABLE HairSpecializesIn
+INTO TABLE Hair_Specializes_In
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -466,7 +409,7 @@ select '------------------------------------------------------------------------
 select 'Create Categories' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_categories_raw.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_categories_raw.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_categories_exploded.csv' 
 IGNORE
 INTO TABLE Categories
 FIELDS TERMINATED BY ','
