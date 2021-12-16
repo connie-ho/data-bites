@@ -69,7 +69,7 @@ def search():
         cursor = mysql.connection.cursor()
         # create a view for stars and review count
         query = """
-        SELECT business_id, name, AVG(reviews.stars), count(review_id) FROM Business
+        SELECT business_id, name, AVG(reviews.stars), count(review_id) FROM Businesses
             LEFT JOIN Reviews USING(business_id) """
 
         if categories and len(categories):
@@ -116,7 +116,7 @@ def business(business_id):
     cursor = mysql.connection.cursor()
     #TODO: display all business attributes by joining tables
     query = """
-    SELECT * FROM Business
+    SELECT * FROM Businesses
     LEFT JOIN Reviews USING(business_id) 
     WHERE business_id=%s"""
     res = cursor.execute(query,[business_id])

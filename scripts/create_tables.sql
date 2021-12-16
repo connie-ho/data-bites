@@ -1,24 +1,27 @@
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS Ambience;
+DROP TABLE IF EXISTS Attributes;
 DROP TABLE IF EXISTS Best_Nights;
 DROP TABLE IF EXISTS Business_Parking;
 DROP TABLE IF EXISTS Dietary_Restrictions;
-DROP TABLE IF EXISTS Good_For_Meal;
+DROP TABLE IF EXISTS Good_For_Meals;
 DROP TABLE IF EXISTS Hair_Specializes_In;
 DROP TABLE IF EXISTS Music;
 DROP TABLE IF EXISTS Attributes;
 DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Business_Hours;
-DROP TABLE IF EXISTS Business;
-DROP TABLE IF EXISTS Checkin;
+DROP TABLE IF EXISTS Businesses;
+DROP TABLE IF EXISTS Checkins;
 DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Tips;
+DROP TABLE IF EXISTS Tip_Compliments;
 DROP TABLE IF EXISTS User_Friends;
-DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS User_Elite;
 SET foreign_key_checks = 1;
 
-CREATE TABLE Business (
+CREATE TABLE Businesses (
     business_id char(22) NOT NULL,
     name varchar(70) NOT NULL,
 	-- max is 64
@@ -37,7 +40,7 @@ CREATE TABLE Business (
     is_open BOOLEAN
 );
 
-CREATE TABLE User (
+CREATE TABLE Users (
     user_id char(22) NOT NULL,
     name varchar(35),
 	-- max is 32
@@ -72,7 +75,7 @@ CREATE TABLE User_Friends(
     friend_id char(22) NOT NULL
 );
 
-CREATE TABLE Checkin(
+CREATE TABLE Checkins(
     business_id char(22) NOT NULL,
     date datetime NOT NULL
 );
@@ -90,7 +93,7 @@ CREATE TABLE Tip_Compliments(
     user_id char(22) NOT NULL,
     business_id char(22) NOT NULL,
     complimenter_id char(22) NOT NULL -- populate with fake user 22x0s
-)
+);
 
 CREATE TABLE Reviews (
     review_id char(22) NOT NULL,
@@ -127,7 +130,7 @@ CREATE TABLE Attributes (
 );
 
 CREATE TABLE Restaurants ( -- make into rows with these attributes as enums
-    business_id char(22) NOT NULL
+    business_id char(22) NOT NULL,
     table_service BOOLEAN,
     reservations BOOLEAN,
     good_for_groups BOOLEAN, 
@@ -182,7 +185,7 @@ CREATE TABLE Dietary_Restrictions (
     vegetarian BOOLEAN
 );
 
-CREATE TABLE Good_For_Meal (
+CREATE TABLE Good_For_Meals (
     business_id char(22) NOT NULL,
     dessert BOOLEAN,
     latenight BOOLEAN,

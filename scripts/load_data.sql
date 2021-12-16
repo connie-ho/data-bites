@@ -1,12 +1,12 @@
 SET GLOBAL local_infile = 1;
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Business' as '';
+select 'Create Businesses' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business.csv' 
 IGNORE
-INTO TABLE Business
+INTO TABLE Businesses
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -26,12 +26,12 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create User' as '';
+select 'Create Users' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_user.csv' 
 IGNORE
-INTO TABLE User
+INTO TABLE Users
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -93,12 +93,12 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Checkin' as '';
+select 'Create Checkins' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_checkin.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_checkin.csv' 
 IGNORE
-INTO TABLE Checkin
+INTO TABLE Checkins
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
@@ -318,7 +318,7 @@ select 'Create GoodForMeal' as '';
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '/home/andy/Documents/data-bites/yelp_dataset_csv/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
 IGNORE
-INTO TABLE Good_For_Meal
+INTO TABLE Good_For_Meals
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'

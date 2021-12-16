@@ -15,9 +15,9 @@ mydb = MySQLdb.connect(
 
 cursor = mydb.cursor()
 
-print("Dropping User Table...")
+print("Dropping Users Table...")
 cursor.execute('DROP TABLE IF EXISTS Users')
-print("Creating User Table...")
+print("Creating Users Table...")
 cursor.execute('CREATE TABLE Users(name varchar(20), email varchar(20))')
 cursor.close()
 print("Done")
