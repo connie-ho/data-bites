@@ -10,7 +10,8 @@ ALTER TABLE User ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 
 ALTER TABLE User ADD CONSTRAINT check_user_average_stars CHECK(average_stars >= 0 AND average_stars <= 5);
 
 ALTER TABLE User_Elite ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
-ALTER TABLE User_Elite ADD CONSTRAINT check_year_elite CHECK(YEAR(elite) >= 2004 AND YEAR(elite) <= 2100);
+DELETE FROM User_Elite WHERE elite = 0;
+ALTER TABLE User_Elite ADD CONSTRAINT check_year_elite CHECK(elite >= 2004 AND elite <= 2100);
 
 ALTER TABLE User_Friends ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
 -- ALTER TABLE UserFriends ADD FOREIGN KEY (friend_id) REFERENCES User(user_id);
