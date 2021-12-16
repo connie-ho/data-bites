@@ -120,8 +120,8 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
-    business_id,
     user_id,
+    business_id,
     text,
     date,
     compliment_count
