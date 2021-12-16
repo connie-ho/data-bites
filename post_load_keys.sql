@@ -11,3 +11,9 @@ ALTER TABLE User DROP compliment_cool;
 ALTER TABLE User DROP compliment_funny;
 ALTER TABLE User DROP compliment_writer;
 ALTER TABLE User DROP compliment_photos;
+
+ALTER TABLE User DROP useful;.
+ALTER TABLE User DROP funny;
+ALTER TABLE User DROP cool;
+ALTER TABLE User DROP fans;
+ALTER TABLE User DROP review_count;
