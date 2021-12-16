@@ -12,7 +12,11 @@ ALTER TABLE User DROP compliment_funny;
 ALTER TABLE User DROP compliment_writer;
 ALTER TABLE User DROP compliment_photos;
 
+<<<<<<< HEAD
 ALTER TABLE User DROP useful;
+=======
+ALTER TABLE User DROP useful;.
+>>>>>>> 80ce46808471e649b0d0dfc5c9690199cb069463
 ALTER TABLE User DROP funny;
 ALTER TABLE User DROP cool;
 ALTER TABLE User DROP fans;
