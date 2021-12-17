@@ -15,10 +15,11 @@ ALTER TABLE Users
     ADD CONSTRAINT check_user_average_stars CHECK(average_stars >= 0 AND average_stars <= 5);
 
 select 'Alter User_Elite' as '';
+DELETE FROM User_Elite WHERE elite = 0;
 ALTER TABLE User_Elite
     ADD PRIMARY KEY (user_id, elite),
     ADD FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    ADD CONSTRAINT check_year_elite CHECK(YEAR(elite) >= 2004 AND YEAR(elite) <= 2100);
+    ADD CONSTRAINT check_year_elite CHECK(elite >= 2004 AND elite <= 2100);
 
 select 'Alter User_Friends' as '';
 ALTER TABLE User_Friends 
@@ -33,9 +34,6 @@ ALTER TABLE User_Friends
 -- If all data is loaded appropriately the Delete from sql command shouldn't delete anything
 select 'Alter Checkins' as '';
 DELETE FROM Checkins WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Checkins 
-    ADD PRIMARY KEY (business_id, date),
-    ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Tips' as '';
 DELETE FROM Tips WHERE business_id NOT IN (SELECT business_id from Businesses);
@@ -44,7 +42,6 @@ DELETE FROM Tips WHERE business_id NOT IN (SELECT business_id from Businesses);
 -- Need to update time to Nulls to add FKs
 UPDATE Tips SET date = NULL WHERE CAST(date AS CHAR(20)) = '0000-00-00 00:00:00';
 ALTER TABLE Tips
-    ADD PRIMARY KEY (user_id, business_id, date),
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
     ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
 
@@ -52,7 +49,8 @@ select 'Alter Tip_Compliments' as '';
 ALTER TABLE Tip_Compliments
     ADD PRIMARY KEY (user_id, business_id, complimenter_id),
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
-    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
+    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    ADD FOREIGN KEY (complimenter_id) REFERENCES Users(user_id);
     -- didn't add foreign key complimenter id because there will definitely be a lot of nulls
 
 select 'Alter Reviews' as '';

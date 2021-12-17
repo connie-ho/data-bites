@@ -77,16 +77,19 @@ CREATE TABLE User_Friends(
 
 CREATE TABLE Checkins(
     business_id char(22) NOT NULL,
-    date datetime NOT NULL
+    date datetime NOT NULL,
+    PRIMARY KEY (business_id, date),
+    FOREIGN KEY (business_id) REFERENCES Businesses(business_id)
 );
 
 CREATE TABLE Tips (
     user_id char(22) NOT NULL,
     business_id char(22) NOT NULL,
-    text varchar(500),
+    text text,
     -- max is 500
     date datetime,
-    compliment_count int -- remove if number is small
+    compliment_count int, -- remove if number is small
+    PRIMARY KEY (user_id, business_id, date)
 );
 
 CREATE TABLE Tip_Compliments(
@@ -103,7 +106,7 @@ CREATE TABLE Reviews (
     useful int, 
     funny int,
     cool int,
-    text varchar(5000),
+    text text,
     -- max is 5000
     date datetime
 );
