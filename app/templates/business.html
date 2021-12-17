@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search Results
+{% endblock %}
+
+{% block main %}
+    <h1>{{ business_details['name'] }}</h1>
+    <a href=/{{business_details["business_id"]}}/review>Leave a review</a>
+
+    {% for col in business_details %}
+        <div class="d-flex col">
+            <p>{{col}}: </p>
+            <p>{{business_details[col]}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

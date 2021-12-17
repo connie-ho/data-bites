@@ -9,11 +9,15 @@ ALTER TABLE User ADD PRIMARY KEY (user_id);
 ALTER TABLE User ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 2004 AND YEAR(yelping_since) <= 2100);
 ALTER TABLE User ADD CONSTRAINT check_user_average_stars CHECK(average_stars >= 0 AND average_stars <= 5);
 
-ALTER TABLE User_Elite ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
 DELETE FROM User_Elite WHERE elite = 0;
-ALTER TABLE User_Elite ADD CONSTRAINT check_year_elite CHECK(elite >= 2004 AND elite <= 2100);
+ALTER TABLE User_Elite
+    ADD PRIMARY KEY (user_id, elite),
+    ADD FOREIGN KEY (user_id) REFERENCES User(user_id),
+    ADD CONSTRAINT check_year_elite CHECK(YEAR(elite) >= 2004 AND YEAR(elite) <= 2100);
 
-ALTER TABLE User_Friends ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
+ALTER TABLE User_Friends 
+    ADD PRIMARY KEY (user_id, friend_id),
+    ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
 -- ALTER TABLE UserFriends ADD FOREIGN KEY (friend_id) REFERENCES User(user_id);
 -- 80+% of friend_ids are not in user_ids... 
 
@@ -22,15 +26,25 @@ ALTER TABLE User_Friends ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
 -- Unsure why, tried different embeddings, line-terminations, different optional load parameters like Concurrent etc.
 -- If all data is loaded appropriately the Delete from sql command shouldn't delete anything
 DELETE FROM Checkin WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Checkin ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
+ALTER TABLE Checkin 
+    ADD PRIMARY KEY (business_id, date)
+    ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Tips WHERE business_id NOT IN (SELECT business_id from Business);
 -- Not sure what PK should be because user_id, business_id and their combo are not unique
 -- Maybe include date as well?
 -- Need to update time to Nulls to add FKs
 UPDATE Tips SET date = NULL WHERE CAST(date AS CHAR(20)) = '0000-00-00 00:00:00';
-ALTER TABLE Tips ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
-ALTER TABLE Tips ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
+ALTER TABLE Tips
+    ADD PRIMARY KEY (user_id, business_id, date),
+    ADD FOREIGN KEY (business_id) REFERENCES Business(business_id),
+    ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
+
+ALTER TABLE Tip_Compliments
+    ADD PRIMARY KEY (user_id, business_id, complimenter_id),
+    ADD FOREIGN KEY (business_id) REFERENCES Business(business_id),
+    ADD FOREIGN KEY (user_id) REFERENCES User(user_id);
+    -- didn't add foreign key complimenter id because there will definitely be a lot of nulls
 
 DELETE FROM Reviews WHERE business_id NOT IN (SELECT business_id from Business);
 ALTER TABLE Reviews ADD PRIMARY KEY (review_id);
@@ -101,8 +115,14 @@ ALTER TABLE Business_Hours
 --  ;
 
 
+-- MAKE ALL OF THESE LIKE USER FRIENDS AND THEN ENUM
+
 DELETE FROM Attributes WHERE business_id NOT IN (SELECT business_id from Business);
 ALTER TABLE Attributes ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
+
+ALTER TABLE Restaurants 
+    ADD PRIMARY KEY business_id,
+    ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Ambience WHERE business_id NOT IN (SELECT business_id from Business);
 ALTER TABLE Ambience ADD PRIMARY KEY (business_id);
