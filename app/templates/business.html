@@ -25,7 +25,33 @@ data['details']['name']
             <p class="mr-2">{{elem[0]}}</p>
         {% endfor %}
     </div>
-    
+
+    <h2>Tips</h2>
+    <a href=/{{data["business_id"]}}/tip>Leave a tip</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Text</th>
+                <th>Date</th>
+                <th>Compliments</th>
+                
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for tip in data['tips'] %}
+            <tr>
+                <td>{{tip['user_id']}}</td>
+                <td>{{tip['text']}}</td>
+                <td>{{tip['date']}}</td>
+                <td>{{tip['compliment_count']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    <table>
+
+
     <h2>Reviews</h2>
     <a href=/{{data["business_id"]}}/review>Leave a review</a>
     <table class="table">
@@ -44,7 +70,11 @@ data['details']['name']
         <tbody>
             {% for review in data['reviews'] %}
             <tr>
-                <td>{{review['user_id']}}</td>
+                <td>
+                    <a href=/user/{{review['user_id']}}>
+                        {{review['user_id']}}
+                    </a>
+                </td>
                 <td>{{review['stars']}}</td>
                 <td>{{review['text']}}</td>
                 <td>{{review['date']}}</td>

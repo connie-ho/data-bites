@@ -36,6 +36,19 @@ mysql = MySQL(app)
 def index():
     return render_template('index.html')
 
+@app.route('/user/<user_id>')
+def user(user_id):
+    query = "SELECT * FROM Users WHERE user_id=%s"
+    cursor = mysql.connection.cursor()
+    cursor.execute(query,[user_id])
+    columns = cursor.description
+    user = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()][0]
+    if user: 
+        return render_template('user.html', user=user)
+    else: 
+        return 'Error retrieving user details'
+
+
 @app.route('/create-account', methods=['GET', 'POST'])
 def create_account():
     if request.method == 'POST':
@@ -164,6 +177,17 @@ def business(business_id):
         columns = cursor.description
         reviews = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
         data['reviews'] = reviews
+    else: 
+        data['reviews'] = []
+
+    query = "SELECT user_id, text, date, compliment_count FROM Tips WHERE business_id=%s"
+    res = cursor.execute(query,[business_id])
+    if res > 0:
+        columns = cursor.description
+        tips = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+        data['tips'] = tips
+    else: 
+        data['tips'] = []
 
     # add on other attributes e.g. ambience once ready
     query = "SELECT attribute as attributes FROM Attributes WHERE business_id=%s"
@@ -171,12 +195,17 @@ def business(business_id):
     if res > 0:
         attributes = cursor.fetchall()
         data['attributes'] = attributes
+    else: 
+        data['attributes'] = []
+
 
     query = "SELECT categories FROM Categories WHERE business_id=%s"
     res = cursor.execute(query,[business_id])
     if res > 0:
         categories = cursor.fetchall()
         data['categories'] = categories
+    else: 
+        data['categories'] = []
 
     cursor.close()
     return render_template('business.html', data=data)
@@ -217,6 +246,25 @@ def review(business_id):
         return redirect(f'/{business_id}')
 
     return render_template('review.html', business_id=business_id)
+
+@app.route('/<business_id>/tip', methods=["GET", "POST"])
+def tip(business_id):
+    if request.method == "POST":
+        tip = request.form
+        user_id = tip['user_id']
+        text = tip['text']
+
+        if not(user_id and text):
+            return "Error: all fields must be filled"
+
+        # add the tip
+        cursor = mysql.connection.cursor()
+        cursor.execute("INSERT INTO tips(business_id, user_id, text, date) VALUES(%s,%s,%s, %s)",(business_id, user_id, text, str(datetime.today())))
+        mysql.connection.commit()
+        cursor.close() 
+        return redirect(f'/{business_id}')
+
+    return render_template('tip.html', business_id=business_id)
 
 def errorhandler(e):
     """Handle error"""
