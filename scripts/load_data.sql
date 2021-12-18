@@ -202,26 +202,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @touristy,
-    @hipster,
-    @romantic,
-    @divey,
-    @intimate,
-    @trendy,
-    @upscale,
-    @classy,
-    @casual
-)
-SET touristy = IF(@touristy = 'True',1,0),
-    hipster = IF(@hipster='True', 1,0),
-    romantic = IF(@romantic='True',1,0),
-    divey = IF(@divey='True',1,0),
-    intimate = IF(@intimate='True',1,0),
-    trendy = IF(@trendy='True',1,0),
-    upscale = IF(@upscale='True',1,0),
-    classy = IF(@classy='True',1,0),
-    casual = IF(@casual='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create BestNights' as '';
@@ -236,23 +218,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @monday,
-	@tuesday,
-	@friday,
-	@wednesday,
-	@thursday,
-	@sunday,
-	@saturday
-)
-SET
-	monday = IF(@monday='True',1,0),
-	tuesday = IF(@tuesday='True',1,0),
-	friday = IF(@friday='True',1,0),
-	wednesday = IF(@wednesday='True',1,0),
-	thursday = IF(@thursday='True',1,0),
-	sunday = IF(@sunday='True',1,0),
-	saturday = IF(@saturday='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create BusinessParking' as '';
@@ -267,19 +234,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @garage,
-	@street,
-	@validated,
-	@lot,
-	@valet
-)
-SET
-	garage = IF(@garage='True',1,0),
-	street = IF(@street='True',1,0),
-	validated = IF(@validated='True',1,0),
-	lot = IF(@lot='True',1,0),
-	valet = IF(@valet='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create DietaryRestrictions' as '';
@@ -294,23 +250,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @dairy_free,
-	@gluten_free,
-	@vegan,
-	@kosher,
-	@halal,
-	@soy_free,
-	@vegetarian
-)
-SET
-	dairy_free = IF(@dairy_free='True',1,0),
-	gluten_free = IF(@gluten_free='True',1,0),
-	vegan = IF(@vegan='True',1,0),
-	kosher = IF(@kosher='True',1,0),
-	halal = IF(@halal='True',1,0),
-	soy_free = IF(@soy_free='True',1,0),
-	vegetarian = IF(@vegetarian='True',1,0)
-;
+    attribute
+);
 
 
 select '---------------------------------------------------------------------------------------' as '';
@@ -326,21 +267,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @dessert,
-	@latenight,
-	@lunch,
-	@dinner,
-	@brunch,
-	@breakfast
-)
-SET
-	dessert = IF(@dessert='True',1,0),
-	latenight = IF(@latenight='True',1,0),
-	lunch = IF(@lunch='True',1,0),
-	dinner = IF(@dinner='True',1,0),
-	brunch = IF(@brunch='True',1,0),
-	breakfast = IF(@breakfast='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create HairSpecializesIn' as '';
@@ -355,25 +283,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @straightperms,
-	@coloring,
-	@extensions,
-	@africanamerican,
-	@curly,
-	@kids,
-	@perms,
-	@asian
-)
-SET
-	straightperms = IF(@straightperms='True',1,0),
-	coloring = IF(@coloring='True',1,0),
-	extensions = IF(@extensions='True',1,0),
-	africanamerican = IF(@africanamerican='True',1,0),
-	curly = IF(@curly='True',1,0),
-	kids = IF(@kids='True',1,0),
-	perms = IF(@perms='True',1,0),
-	asian = IF(@asian='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create Music' as '';
@@ -388,23 +299,8 @@ LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (
     business_id,
-    @dj,
-	@background_music,
-	@no_music,
-	@jukebox,
-	@live,
-	@video,
-	@karaoke
-)
-SET
-	dj = IF(@dj='True',1,0),
-	background_music = IF(@background_music='True',1,0),
-	no_music = IF(@no_music='True',1,0),
-	jukebox = IF(@jukebox='True',1,0),
-	live = IF(@live='True',1,0),
-	video = IF(@video='True',1,0),
-	karaoke = IF(@karaoke='True',1,0)
-;
+    attribute
+);
 
 select '---------------------------------------------------------------------------------------' as '';
 select 'Create Categories' as '';
