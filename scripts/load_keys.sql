@@ -125,31 +125,31 @@ ALTER TABLE Restaurants
     ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Ambience WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Ambience ADD PRIMARY KEY (business_id);
+ALTER TABLE Ambience ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Ambience ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Best_Nights WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Best_Nights ADD PRIMARY KEY (business_id);
+ALTER TABLE Best_Nights ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Best_Nights ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Business_Parking WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Business_Parking ADD PRIMARY KEY (business_id);
+ALTER TABLE Business_Parking ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Business_Parking ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Dietary_Restrictions WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Dietary_Restrictions ADD PRIMARY KEY (business_id);
+ALTER TABLE Dietary_Restrictions ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Dietary_Restrictions ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Good_For_Meal WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Good_For_Meal ADD PRIMARY KEY (business_id);
+ALTER TABLE Good_For_Meal ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Good_For_Meal ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Hair_Specializes_In WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Hair_Specializes_In ADD PRIMARY KEY (business_id);
+ALTER TABLE Hair_Specializes_In ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Hair_Specializes_In ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Music WHERE business_id NOT IN (SELECT business_id from Business);
-ALTER TABLE Music ADD PRIMARY KEY (business_id);
+ALTER TABLE Music ADD PRIMARY KEY (business_id, attribute);
 ALTER TABLE Music ADD FOREIGN KEY (business_id) REFERENCES Business(business_id);
 
 DELETE FROM Categories WHERE business_id NOT IN (SELECT business_id from Business);

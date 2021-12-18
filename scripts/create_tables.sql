@@ -126,93 +126,55 @@ CREATE TABLE Attributes (
     -- max is 27
 );
 
-CREATE TABLE Restaurants ( -- make into rows with these attributes as enums
-    business_id char(22) NOT NULL
-    table_service BOOLEAN,
-    reservations BOOLEAN,
-    good_for_groups BOOLEAN, 
-    price_range BOOLEAN,
-    takeout BOOLEAN,
-    attire BOOLEAN,
-    delivery BOOLEAN,
-    counter_service BOOLEAN
-);
+-- As we talked about this is gonna remain part of attributes
+
+-- CREATE TABLE Restaurants ( -- make into rows with these attributes as enums
+--     business_id char(22) NOT NULL
+--     table_service BOOLEAN,
+--     reservations BOOLEAN,
+--     good_for_groups BOOLEAN, 
+--     price_range BOOLEAN,
+--     takeout BOOLEAN,
+--     attire BOOLEAN,
+--     delivery BOOLEAN,
+--     counter_service BOOLEAN
+-- );
+
+-- Below are now in rows
 
 CREATE TABLE Ambience (
     business_id char(22) NOT NULL,
-    touristy BOOLEAN,
-    hipster BOOLEAN,
-    romantic BOOLEAN,
-    divey BOOLEAN,
-    intimate BOOLEAN,
-    trendy BOOLEAN,
-    upscale BOOLEAN,
-    classy BOOLEAN,
-    casual BOOLEAN
+    attribute char(10) NOT NULL
 );
 
 CREATE TABLE Best_Nights (
     business_id char(22) NOT NULL,
-    monday BOOLEAN,
-    tuesday BOOLEAN,
-    friday BOOLEAN,
-    wednesday BOOLEAN,
-    thursday BOOLEAN,
-    sunday BOOLEAN,
-    saturday BOOLEAN
+    attribute char(10) NOT NULL
 );
 
 CREATE TABLE Business_Parking (
     business_id char(22) NOT NULL,
-    garage BOOLEAN,
-    street BOOLEAN,
-    validated BOOLEAN,
-    lot BOOLEAN,
-    valet BOOLEAN
+    attribute char(10) NOT NULL
 );
 
 CREATE TABLE Dietary_Restrictions (
     business_id char(22) NOT NULL,
-    dairy_free BOOLEAN,
-    gluten_free BOOLEAN,
-    vegan BOOLEAN,
-    kosher BOOLEAN,
-    halal BOOLEAN,
-    soy_free BOOLEAN,
-    vegetarian BOOLEAN
+    attribute char(15) NOT NULL
 );
 
 CREATE TABLE Good_For_Meal (
     business_id char(22) NOT NULL,
-    dessert BOOLEAN,
-    latenight BOOLEAN,
-    lunch BOOLEAN,
-    dinner BOOLEAN,
-    brunch BOOLEAN,
-    breakfast BOOLEAN
+    attribute char(10) NOT NULL
 );
 
 CREATE TABLE Hair_Specializes_In (
     business_id char(22) NOT NULL,
-    straightperms BOOLEAN,
-    coloring BOOLEAN,
-    extensions BOOLEAN,
-    africanamerican BOOLEAN,
-    curly BOOLEAN,
-    kids BOOLEAN,
-    perms BOOLEAN,
-    asian BOOLEAN
+    attribute char(20) NOT NULL
 );
 
 CREATE TABLE Music (
     business_id char(22) NOT NULL,
-    dj BOOLEAN,
-    background_music BOOLEAN,
-    no_music BOOLEAN,
-    jukebox BOOLEAN,
-    live BOOLEAN,
-    video BOOLEAN,
-    karaoke BOOLEAN
+    attribute char(20) NOT NULL
 );
 
 -- Change this 
