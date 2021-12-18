@@ -1,7 +1,6 @@
-SELECT business_id, name, AVG(reviews.stars) AS avg_stars, count(review_id) AS num_reviews FROM Businesses
-    LEFT JOIN Reviews USING(business_id)
+SELECT business_id, name, review_count, stars, categories FROM Businesses
     LEFT JOIN Categories USING(business_id)
-    WHERE city="Boulder" AND state="CO"
+    WHERE city="Boulder" AND state="CO" and categories IN ("Food,Restaurants")
     GROUP BY business_id;
 
 SELECT * FROM Businesses

@@ -13,6 +13,8 @@ ALTER TABLE Users
     ADD PRIMARY KEY (user_id),
     ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 2004 AND YEAR(yelping_since) <= 2100),
     ADD CONSTRAINT check_user_average_stars CHECK(average_stars >= 0 AND average_stars <= 5);
+INSERT INTO Users (user_id, name, yelping_since)
+Values ('data_bites_guest_user', 'guest', NOW());
 
 select 'Alter User_Elite' as '';
 DELETE FROM User_Elite WHERE elite = 0;
@@ -57,7 +59,8 @@ select 'Alter Reviews' as '';
 DELETE FROM Reviews WHERE business_id NOT IN (SELECT business_id from Businesses);
 ALTER TABLE Reviews ADD PRIMARY KEY (review_id),
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
-    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
+    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    ADD UNIQUE (business_id, user_id);
 
 select 'Alter Business_Hours' as '';
 DELETE FROM Business_Hours WHERE business_id NOT IN (SELECT business_id from Businesses);

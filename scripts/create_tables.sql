@@ -44,24 +44,24 @@ CREATE TABLE Users (
     user_id char(22) NOT NULL,
     name varchar(35),
 	-- max is 32
-    review_count int, -- if review count is small, then drop column, if it is large, then leave
+    review_count int DEFAULT 0, -- if review count is small, then drop column, if it is large, then leave
     yelping_since datetime,
-    useful int, -- same for all the tags
-    funny int,
-    cool int, 
-    fans int,
-    average_stars int,
-    compliment_hot int,
-    compliment_more int,
-    compliment_profile int,
-    compliment_cute int,
-    compliment_list int,
-    compliment_note int,
-    compliment_plain int,
-    compliment_cool int,
-    compliment_funny int,
-    compliment_writer int,
-    compliment_photos int
+    useful int DEFAULT 0, -- same for all the tags
+    funny int DEFAULT 0,
+    cool int DEFAULT 0,
+    fans int DEFAULT 0,
+    average_stars int DEFAULT 0,
+    compliment_hot int DEFAULT 0,
+    compliment_more int DEFAULT 0,
+    compliment_profile int DEFAULT 0,
+    compliment_cute int DEFAULT 0,
+    compliment_list int DEFAULT 0,
+    compliment_note int DEFAULT 0,
+    compliment_plain int DEFAULT 0,
+    compliment_cool int DEFAULT 0,
+    compliment_funny int DEFAULT 0,
+    compliment_writer int DEFAULT 0,
+    compliment_photos int DEFAULT 0
 );
 
 CREATE TABLE User_Elite(
@@ -88,7 +88,7 @@ CREATE TABLE Tips (
     text text,
     -- max is 500
     date datetime,
-    compliment_count int, -- remove if number is small
+    compliment_count int DEFAULT 0, -- remove if number is small
     PRIMARY KEY (user_id, business_id, date)
 );
 
@@ -102,10 +102,10 @@ CREATE TABLE Reviews (
     review_id char(22) NOT NULL,
     user_id char(22) NOT NULL,
     business_id char(22) NOT NULL,
-    stars int,
-    useful int, 
-    funny int,
-    cool int,
+    stars int DEFAULT 0,
+    useful int DEFAULT 0, 
+    funny int DEFAULT 0,
+    cool int DEFAULT 0,
     text text,
     -- max is 5000
     date datetime
