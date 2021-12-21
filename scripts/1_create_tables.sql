@@ -45,13 +45,11 @@ CREATE TABLE Users (
     user_id char(22) NOT NULL,
     name varchar(35),
 	-- max is 32
-    review_count int DEFAULT 0, -- if review count is small, then drop column, if it is large, then leave
     yelping_since datetime,
     useful int DEFAULT 0, -- same for all the tags
     funny int DEFAULT 0,
     cool int DEFAULT 0,
     fans int DEFAULT 0,
-    average_stars int DEFAULT 0,
     compliment_hot int DEFAULT 0,
     compliment_more int DEFAULT 0,
     compliment_profile int DEFAULT 0,
@@ -99,13 +97,13 @@ CREATE TABLE Tips (
 CREATE TABLE Tip_Compliments(
     user_id char(22) NOT NULL,
     business_id char(22) NOT NULL,
-    complimenter_id char(22) NOT NULL, -- populate with fake user 22x0s
+    complimenter_id char(22) NOT NULL,
     PRIMARY KEY (user_id, business_id, complimenter_id)
 );
 
 CREATE TABLE User_Compliments(
     user_id char(22) NOT NULL,
-    complimenter_id char(22) NOT NULL, -- populate with fake user 22x0s
+    complimenter_id char(22) NOT NULL, 
     PRIMARY KEY (user_id, complimenter_id)
 );
 
@@ -188,7 +186,6 @@ CREATE TABLE Music (
     PRIMARY KEY (business_id, attribute)
 );
 
--- Change this 
 CREATE TABLE Categories (
 	business_id char(22) NOT NULL,
 	categories varchar(40),

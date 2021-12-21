@@ -51,7 +51,9 @@ def user(user_id):
         except:
             return 'Error adding friend'
     query = """
-    SELECT Users.*, COUNT(distinct friend_id) as friends, COUNT(distinct useful) as useful, COUNT(distinct funny) as funny, COUNT(distinct cool) as cool
+    SELECT COUNT(distinct review_id) as reviews, CAST(AVG(stars) AS UNSIGNED) as 'average stars',
+    COUNT(distinct friend_id) as friends, COUNT(distinct useful) as useful, COUNT(distinct funny) as funny, COUNT(distinct cool) as cool, 
+    Users.*
     FROM Users LEFT JOIN Reviews USING(user_id) LEFT JOIN User_Friends USING(user_id)
     WHERE user_id=%s
     """
