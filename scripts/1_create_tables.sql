@@ -37,7 +37,8 @@ CREATE TABLE Businesses (
     longitude decimal(13,10) NOT NULL,
     stars float,
     review_count int,
-    is_open BOOLEAN
+    is_open BOOLEAN,
+    PRIMARY KEY(business_id)
 );
 
 CREATE TABLE Users (
@@ -61,18 +62,21 @@ CREATE TABLE Users (
     compliment_cool int DEFAULT 0,
     compliment_funny int DEFAULT 0,
     compliment_writer int DEFAULT 0,
-    compliment_photos int DEFAULT 0
+    compliment_photos int DEFAULT 0,
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE User_Elite(
     user_id char(22) NOT NULL,
-    elite int(4) NOT NULL
+    elite int(4) NOT NULL,
+    PRIMARY KEY (user_id, elite)
     -- elite is the year i.e. 2012; 2015
 );
 
 CREATE TABLE User_Friends(
     user_id char(22) NOT NULL,
-    friend_id char(22) NOT NULL
+    friend_id char(22) NOT NULL,
+    PRIMARY KEY (user_id, friend_id)
 );
 
 CREATE TABLE Checkins(
@@ -87,7 +91,7 @@ CREATE TABLE Tips (
     business_id char(22) NOT NULL,
     text text,
     -- max is 500
-    date datetime,
+    date datetime DEFAULT '1970-01-01 00:00:00',
     compliment_count int DEFAULT 0, -- remove if number is small
     PRIMARY KEY (user_id, business_id, date)
 );
@@ -95,7 +99,14 @@ CREATE TABLE Tips (
 CREATE TABLE Tip_Compliments(
     user_id char(22) NOT NULL,
     business_id char(22) NOT NULL,
-    complimenter_id char(22) NOT NULL -- populate with fake user 22x0s
+    complimenter_id char(22) NOT NULL, -- populate with fake user 22x0s
+    PRIMARY KEY (user_id, business_id, complimenter_id)
+);
+
+CREATE TABLE User_Compliments(
+    user_id char(22) NOT NULL,
+    complimenter_id char(22) NOT NULL, -- populate with fake user 22x0s
+    PRIMARY KEY (user_id, complimenter_id)
 );
 
 CREATE TABLE Reviews (
@@ -108,7 +119,9 @@ CREATE TABLE Reviews (
     cool int DEFAULT 0,
     text text,
     -- max is 5000
-    date datetime
+    date datetime,
+    PRIMARY KEY (review_id),
+    UNIQUE (business_id, user_id)
 );
 
 CREATE TABLE Business_Hours (
@@ -119,74 +132,66 @@ CREATE TABLE Business_Hours (
     Thursday char(11),
     Friday char(11),
     Saturday char(11),
-    Sunday char(11)
+    Sunday char(11),
 	-- max is 11
 	-- i.e. 11:0-7:0
 	-- Maybe alter opening / closing time for each day
+    PRIMARY KEY (business_id)
  );
 
--- attributes=lowercase ask on Tuesday
 CREATE TABLE Attributes (
     business_id char(22) NOT NULL,
-    attribute char(30) NOT NULL
+    attribute char(30) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
     -- max is 27
 );
 
--- As we talked about this is gonna remain part of attributes
-
--- CREATE TABLE Restaurants ( -- make into rows with these attributes as enums
---     business_id char(22) NOT NULL
---     table_service BOOLEAN,
---     reservations BOOLEAN,
---     good_for_groups BOOLEAN, 
---     price_range BOOLEAN,
---     takeout BOOLEAN,
---     attire BOOLEAN,
---     delivery BOOLEAN,
---     counter_service BOOLEAN
--- );
-
--- Below are now in rows
-
 CREATE TABLE Ambience (
     business_id char(22) NOT NULL,
-    attribute char(10) NOT NULL
+    attribute char(10) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 CREATE TABLE Best_Nights (
     business_id char(22) NOT NULL,
-    attribute char(10) NOT NULL
+    attribute char(10) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 CREATE TABLE Business_Parking (
     business_id char(22) NOT NULL,
-    attribute char(10) NOT NULL
+    attribute char(10) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 CREATE TABLE Dietary_Restrictions (
     business_id char(22) NOT NULL,
-    attribute char(15) NOT NULL
+    attribute char(15) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 CREATE TABLE Good_For_Meals (
     business_id char(22) NOT NULL,
-    attribute char(10) NOT NULL
+    attribute char(10) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 CREATE TABLE Hair_Specializes_In (
     business_id char(22) NOT NULL,
-    attribute char(20) NOT NULL
+    attribute char(20) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 CREATE TABLE Music (
     business_id char(22) NOT NULL,
-    attribute char(20) NOT NULL
+    attribute char(20) NOT NULL,
+    PRIMARY KEY (business_id, attribute)
 );
 
 -- Change this 
--- col 1= business; col enum_string
 CREATE TABLE Categories (
 	business_id char(22) NOT NULL,
-	categories varchar(500)
+	categories varchar(40),
+    PRIMARY KEY (business_id, categories)
 );
 

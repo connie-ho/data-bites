@@ -28,17 +28,11 @@ WHERE
     t1.business_id = t2.business_id AND 
     t1.date = t2.date;
 
-ERROR 1062 (23000): Duplicate entry '--UNNdnHRhsyFUbDgumdtQ-2016-05-20 03:31:03' for key 'checkins.PRIMARY'
-+------------+
-|            |
-+------------+
-| Alter Tips |
-+------------+
-1 row in set (0.00 sec)
-
-Query OK, 143 rows affected (1.38 sec)
-
-Query OK, 46 rows affected (0.44 sec)
-Rows matched: 46  Changed: 46  Warnings: 0
-
-ERROR 1062 (23000): Duplicate entry '51Yfy5Xv27dHi74E3XJ-oQ-Bd374WlV8Sz3v_117_3Q7g-2011-07-18 00:34:1' for key 'tips.PRIMARY'
+ SELECT name, stars, review_count, address, city, state, postal_code, COUNT(date) as checkins
+    FROM Businesses LEFT JOIN Checkins USING (business_id)
+    WHERE business_id='i3YZocozAfEWTRIJX3HTQ' GROUP BY business_id;
+    
+EXPLAIN(SELECT review_id, user_id, name, stars, text, date, Reviews.useful, Reviews.funny, Reviews.cool FROM Reviews
+INNER JOIN Users USING(user_id)
+WHERE business_id="HcY5FBcFbuUkYh-4BM0YnQ");
+    

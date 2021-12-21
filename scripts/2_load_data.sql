@@ -1,7 +1,7 @@
 SET GLOBAL local_infile = 1;
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Businesses' as '';
+select 'Load Businesses' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business.csv' 
@@ -26,7 +26,7 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Users' as '';
+select 'Load Users' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_user.csv' 
@@ -61,7 +61,7 @@ IGNORE 1 LINES
 
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create UserElite' as '';
+select 'Load UserElite' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user_elite.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_user_elite.csv' 
@@ -77,7 +77,7 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create UserFriends' as '';
+select 'Load UserFriends' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_user_friends.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_user_friends.csv' 
@@ -93,7 +93,7 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Checkins' as '';
+select 'Load Checkins' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_checkin.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_checkin.csv' 
@@ -109,7 +109,7 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Tips' as '';
+select 'Load Tips' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_tips.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_tips.csv'
@@ -128,7 +128,7 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Reviews' as '';
+select 'Load Reviews' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_review.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_review.csv'
@@ -152,7 +152,7 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create BusinessHours' as '';
+select 'Load BusinessHours' as '';
 
 -- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_hours.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_hours.csv' 
@@ -174,9 +174,9 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Attributes' as '';
+select 'Load Attributes' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_attributes.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_attributes_exploded.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_exploded.csv' 
 IGNORE
 INTO TABLE Attributes
@@ -190,10 +190,10 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Ambience' as '';
+select 'Load Ambience' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_Ambience.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_Ambience.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_Ambience_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_Ambience_exploded.csv' 
 IGNORE
 INTO TABLE Ambience
 FIELDS TERMINATED BY ','
@@ -206,10 +206,10 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create BestNights' as '';
+select 'Load BestNights' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_BestNights.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_BestNights.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_BestNights_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_BestNights_exploded.csv' 
 IGNORE
 INTO TABLE Best_Nights
 FIELDS TERMINATED BY ','
@@ -222,10 +222,10 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create BusinessParking' as '';
+select 'Load BusinessParking' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_BusinessParking.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_BusinessParking.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_BusinessParking_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_BusinessParking_exploded.csv' 
 IGNORE
 INTO TABLE Business_Parking
 FIELDS TERMINATED BY ','
@@ -238,10 +238,10 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create DietaryRestrictions' as '';
+select 'Load DietaryRestrictions' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_DietaryRestrictions.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_DietaryRestrictions.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_DietaryRestrictions_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_DietaryRestrictions_exploded.csv' 
 IGNORE
 INTO TABLE Dietary_Restrictions
 FIELDS TERMINATED BY ','
@@ -255,10 +255,10 @@ IGNORE 1 LINES
 
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create GoodForMeal' as '';
+select 'Load GoodForMeal' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_GoodForMeal.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_GoodForMeal_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_GoodForMeal_exploded.csv' 
 IGNORE
 INTO TABLE Good_For_Meals
 FIELDS TERMINATED BY ','
@@ -271,10 +271,10 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create HairSpecializesIn' as '';
+select 'Load HairSpecializesIn' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_HairSpecializesIn.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_HairSpecializesIn.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_HairSpecializesIn_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_HairSpecializesIn_exploded.csv' 
 IGNORE
 INTO TABLE Hair_Specializes_In
 FIELDS TERMINATED BY ','
@@ -287,10 +287,10 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Music' as '';
+select 'Load Music' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_Music.csv' 
-LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_Music.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_attributes_Music_exploded.csv' 
+LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_attributes_Music_exploded.csv' 
 IGNORE
 INTO TABLE Music
 FIELDS TERMINATED BY ','
@@ -303,9 +303,9 @@ IGNORE 1 LINES
 );
 
 select '---------------------------------------------------------------------------------------' as '';
-select 'Create Categories' as '';
+select 'Load Categories' as '';
 
--- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_categories_raw.csv' 
+-- LOAD DATA CONCURRENT LOCAL INFILE '/var/lib/mysql-files/yelp_academic_dataset_business_categories_exploded.csv' 
 LOAD DATA CONCURRENT LOCAL INFILE '../yelp-dataset-csv/yelp_academic_dataset_business_categories_exploded.csv' 
 IGNORE
 INTO TABLE Categories

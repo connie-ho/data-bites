@@ -1,7 +1,6 @@
 
 select 'Alter Businesses' as '';
 ALTER TABLE Businesses 
-    ADD PRIMARY KEY (business_id),
     ADD CONSTRAINT check_state_char CHECK(state REGEXP('[A-Za-z][A-Za-z]')),
     ADD CONSTRAINT check_city_char CHECK(city REGEXP('[A-Za-z]+')),
     ADD CONSTRAINT check_latitude CHECK(latitude >= -90 AND latitude <= 90),
@@ -10,7 +9,6 @@ ALTER TABLE Businesses
 
 select 'Alter Users' as '';
 ALTER TABLE Users 
-    ADD PRIMARY KEY (user_id),
     ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 2004 AND YEAR(yelping_since) <= 2100),
     ADD CONSTRAINT check_user_average_stars CHECK(average_stars >= 0 AND average_stars <= 5);
 INSERT INTO Users (user_id, name, yelping_since)
@@ -19,14 +17,13 @@ Values ('data_bites_guest_user', 'guest', NOW());
 select 'Alter User_Elite' as '';
 DELETE FROM User_Elite WHERE elite = 0;
 ALTER TABLE User_Elite
-    ADD PRIMARY KEY (user_id, elite),
     ADD FOREIGN KEY (user_id) REFERENCES Users(user_id),
     ADD CONSTRAINT check_year_elite CHECK(elite >= 2004 AND elite <= 2100);
 
 select 'Alter User_Friends' as '';
 ALTER TABLE User_Friends 
-    ADD PRIMARY KEY (user_id, friend_id),
-    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
+    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    ADD CONSTRAINT check_friends CHECK(user_id != friend_id);
 -- ALTER TABLE UserFriends ADD FOREIGN KEY (friend_id) REFERENCES Users(user_id);
 -- 80+% of friend_ids are not in user_ids... 
 
@@ -39,33 +36,31 @@ DELETE FROM Checkins WHERE business_id NOT IN (SELECT business_id from Businesse
 
 select 'Alter Tips' as '';
 DELETE FROM Tips WHERE business_id NOT IN (SELECT business_id from Businesses);
--- Not sure what PK should be because user_id, business_id and their combo are not unique
--- Maybe include date as well?
--- Need to update time to Nulls to add FKs
-UPDATE Tips SET date = NULL WHERE CAST(date AS CHAR(20)) = '0000-00-00 00:00:00';
+UPDATE Tips SET date = '1970-01-01 00:00:00' WHERE CAST(date AS CHAR(20)) = '0000-00-00 00:00:00';
 ALTER TABLE Tips
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
     ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
 
 select 'Alter Tip_Compliments' as '';
 ALTER TABLE Tip_Compliments
-    ADD PRIMARY KEY (user_id, business_id, complimenter_id),
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
     ADD FOREIGN KEY (user_id) REFERENCES Users(user_id),
     ADD FOREIGN KEY (complimenter_id) REFERENCES Users(user_id);
-    -- didn't add foreign key complimenter id because there will definitely be a lot of nulls
+
+select 'Alter User_Compliments' as '';
+ALTER TABLE User_Compliments
+    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    ADD FOREIGN KEY (complimenter_id) REFERENCES Users(user_id);
 
 select 'Alter Reviews' as '';
 DELETE FROM Reviews WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Reviews ADD PRIMARY KEY (review_id),
+ALTER TABLE Reviews
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
-    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id)
-    ADD UNIQUE (business_id, user_id);
+    ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
 
 select 'Alter Business_Hours' as '';
 DELETE FROM Business_Hours WHERE business_id NOT IN (SELECT business_id from Businesses);
 ALTER TABLE Business_Hours 
-    ADD PRIMARY KEY (business_id),
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
     ADD Monday_Open char(5), ADD Monday_Close char(5),
     ADD Tuesday_Open char(5), ADD Tuesday_Close char(5),
@@ -107,72 +102,58 @@ ALTER TABLE Business_Hours
  DROP COLUMN Friday,
  DROP COLUMN Saturday,
  DROP COLUMN Sunday
- ;
+;
 
---  ALTER TABLE Business_Hours 
---  drop column Monday_Open, 
---  drop column Monday_Close, 
---  drop column Tuesday_Open, 
---  drop column Tuesday_Close, 
---  drop column Wednesday_Open, 
---  drop column Wednesday_Close, 
---  drop column Thursday_Open, 
---  drop column Thursday_Close, 
---  drop column Friday_Open, 
---  drop column Friday_Close, 
---  drop column Saturday_Open, 
---  drop column Saturday_Close, 
---  drop column Sunday_Open, 
---  drop column Sunday_Close
---  ;
-
-
--- MAKE ALL OF THESE LIKE USER FRIENDS AND THEN ENUM
-
-select 'Attributes' as '';
+select 'Alter Attributes' as '';
 DELETE FROM Attributes WHERE business_id NOT IN (SELECT business_id from Businesses);
 ALTER TABLE Attributes ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
-select 'Alter Restaurants' as '';
-ALTER TABLE Restaurants 
-    ADD PRIMARY KEY (business_id),
-    ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
-
-select 'Ambience' as '';
+select 'Alter Ambience' as '';
 DELETE FROM Ambience WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Ambience ADD PRIMARY KEY (business_id);
 ALTER TABLE Ambience ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Best_Nights' as '';
 DELETE FROM Best_Nights WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Best_Nights ADD PRIMARY KEY (business_id);
 ALTER TABLE Best_Nights ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Business_Parking' as '';
 DELETE FROM Business_Parking WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Business_Parking ADD PRIMARY KEY (business_id);
 ALTER TABLE Business_Parking ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Dietary_Restrictions' as '';
 DELETE FROM Dietary_Restrictions WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Dietary_Restrictions ADD PRIMARY KEY (business_id);
 ALTER TABLE Dietary_Restrictions ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Good_For_Meals' as '';
 DELETE FROM Good_For_Meals WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Good_For_Meals ADD PRIMARY KEY (business_id);
 ALTER TABLE Good_For_Meals ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Hair_Specializes_In' as '';
 DELETE FROM Hair_Specializes_In WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Hair_Specializes_In ADD PRIMARY KEY (business_id);
 ALTER TABLE Hair_Specializes_In ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Music' as '';
 DELETE FROM Music WHERE business_id NOT IN (SELECT business_id from Businesses);
-ALTER TABLE Music ADD PRIMARY KEY (business_id);
 ALTER TABLE Music ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
 
 select 'Alter Categories' as '';
 DELETE FROM Categories WHERE business_id NOT IN (SELECT business_id from Businesses);
 ALTER TABLE Categories ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id);
+
+-- ALTER TABLE Users DROP compliment_hot;
+-- ALTER TABLE Users DROP compliment_more;
+-- ALTER TABLE Users DROP compliment_profile;
+-- ALTER TABLE Users DROP compliment_cute;
+-- ALTER TABLE Users DROP compliment_list;
+-- ALTER TABLE Users DROP compliment_note;
+-- ALTER TABLE Users DROP compliment_plain;
+-- ALTER TABLE Users DROP compliment_cool;
+-- ALTER TABLE Users DROP compliment_funny;
+-- ALTER TABLE Users DROP compliment_writer;
+-- ALTER TABLE Users DROP compliment_photos;
+
+ALTER TABLE Users DROP useful;
+ALTER TABLE Users DROP funny;
+ALTER TABLE Users DROP cool;
+ALTER TABLE Users DROP fans;
+ALTER TABLE Users DROP review_count;

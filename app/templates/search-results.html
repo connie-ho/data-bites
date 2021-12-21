@@ -22,7 +22,7 @@ Search Results
                 <td><a href=/{{row}}>{{businesses[row]['name']}}</a></td>
                 <td>{{businesses[row]['avg_stars'] if row[2] else "No ratings yet"}}</td>
                 <td>{{businesses[row]['review_count']}}</td>
-                <td>{{''.join(businesses[row]['categories'])}}</td>
+                <td>{{','.join(businesses[row]['categories'])}}</td>
             </tr>
             {% endfor %}
         </tbody>
