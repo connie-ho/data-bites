@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{user['name']}}
+{% endblock %}
+
+{% block main %}
+    <h1>{{ user['name'] }}</h1>
+    {% for col in user %}
+        {% if col != "name" %}
+            <div class="d-flex col">
+                <p class="mr-2"> {{col}}: {{user[col]}}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <form method="post">
+        <input type="text" name='user_id' placeholder="Your user id"></input>
+        <button type="submit">Add friend</button>
+    </form>
+
+
+{% endblock %}

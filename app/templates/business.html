@@ -1,17 +1,126 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Search Results
+{{data['details']['name']}}
 {% endblock %}
 
 {% block main %}
-    <h1>{{ business_details['name'] }}</h1>
-    <a href=/{{business_details["business_id"]}}/review>Leave a review</a>
-
-    {% for col in business_details %}
-        <div class="d-flex col">
-            <p>{{col}}: </p>
-            <p>{{business_details[col]}}</p>
-        </div>
+    <h1>{{ data['details']['name'] }}</h1>
+    
+    {% for col in data['details'] %}
+    <div class="d-flex col">
+        {% if col != 'business_id' and col != 'hours'%}
+            <h5 class="mr-2"> {{col}}:</h5>
+            <p>{{data['details'][col]}}</p>
+            {% endif %}
+        {% if col == 'hours' %}
+            <div>
+                <h5 class="mr-2"> {{col}}:</h5>
+                {% for elem in data['details'][col]%}
+                    <p>{{elem}}: {{data['details'][col][elem]}}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
     {% endfor %}
+    <div class="d-flex col">
+        <h5 class="mr-2">categories:</h5>
+        {% for elem in data['categories'] %}
+            <p class="mr-2">{{elem[0]}}</p>
+        {% endfor %}
+    </div>
+    <div class="d-flex col">
+        <h5 class="mr-2">attributes:</h5>
+        <p>{{', '.join(data['attributes'])}}</p>
+    </div>
+    
+    <form action="{{ url_for('checkin', business_id=data['business_id']) }}" method="post">
+        <button type="submit">Click here to checkin</button>
+    </form>
+
+
+    <h2>Tips</h2>
+    <a href="/{{data['business_id']}}/tip">Leave a tip</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Text</th>
+                <th>Date</th>
+                <th>Compliments</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for tip in data['tips'] %}
+            <tr>
+                <td>
+                    <a href="/user/{{tip['user_id']}}">
+                        {{tip['name']}}
+                    </a>
+                </td>
+                <td>{{tip['text']}}</td>
+                <td>{{tip['date']}}</td>
+                <td>{{tip['compliment_count']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    <table>
+
+
+    <h2>Reviews</h2>
+    <a href="/{{data['business_id']}}/review">Leave a review</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Stars</th>
+                <th>Text</th>
+                <th>Date</th>
+                <th>Useful</th>
+                <th>Funny</th>
+                <th>Cool</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for review in data['reviews'] %}
+                <tr>
+                    <td>
+                        <a href="/user/{{review['user_id']}}">
+                            {{review['name']}}
+                        </a>
+                    </td>
+                    <td>{{review['stars']}}</td>
+                    <td>{{review['text']}}</td>
+                    <td>{{review['date']}}</td>
+                    <td>
+                        <form action="{{ url_for('review_tag', review_id=review['review_id']) }}" method="post">
+                            <input type="text" hidden name='tag' value="useful"></input>
+                            <input type="text" hidden name='business_id' value="{{data['business_id']}}"></input>
+                            <input type="text" hidden name='count' value="{{review['useful']|int + 1}}"></input>
+                            <button type="submit">{{review['useful']}}</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('review_tag', review_id=review['review_id']) }}" method="post">
+                            <input type="text" hidden name='tag' value="funny"></input>
+                            <input type="text" hidden name='business_id' value="{{data['business_id']}}"></input>
+                            <input type="text" hidden name='count' value="{{review['funny']|int + 1}}"></input>
+                            <button type="submit">{{review['funny']}}</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('review_tag', review_id=review['review_id']) }}" method="post">
+                            <input type="text" hidden name='tag' value="cool"></input>
+                            <input type="text" hidden name='business_id' value="{{data['business_id']}}"></input>
+                            <input type="text" hidden name='count' value="{{review['cool']|int + 1}}"></input>
+                            <button type="submit">{{review['cool']}}</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    <table>
 {% endblock %}
+

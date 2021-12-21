@@ -1,17 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Leave a review
+Leave a tip
 {% endblock %}
 
 {% block main %}
-<h1>Leave a review</h1>
+<h1>Leave a tip</h1>
 <form method="POST" action="">
     <div class="pt-3">
         user_id <input type="text" name="user_id" />
-    </div>
-    <div class="pt-3">
-        stars <input type="number" min="1" max="5" name="stars" />
     </div>
     <div class="pt-3">
         text <input type="text" name="text" />
