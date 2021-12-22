@@ -9,8 +9,7 @@ ALTER TABLE Businesses
 
 select 'Alter Users' as '';
 ALTER TABLE Users 
-    ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 2004 AND YEAR(yelping_since) <= 2100),
-    ADD CONSTRAINT check_user_average_stars CHECK(average_stars >= 0 AND average_stars <= 5);
+    ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 2004 AND YEAR(yelping_since) <= 2100);
 INSERT INTO Users (user_id, name, yelping_since)
 Values ('data_bites_guest_user', 'guest', NOW());
 
@@ -55,6 +54,10 @@ ALTER TABLE User_Compliments
 select 'Alter Reviews' as '';
 DELETE FROM Reviews WHERE business_id NOT IN (SELECT business_id from Businesses);
 ALTER TABLE Reviews
+    ADD CONSTRAINT check_reviews_stars CHECK(stars >= 0 AND stars <= 5),
+    ADD CONSTRAINT check_useful CHECK(useful >= 0),
+    ADD CONSTRAINT check_funny CHECK(funny >= 0),
+    ADD CONSTRAINT check_cool CHECK(cool >= 0),
     ADD FOREIGN KEY (business_id) REFERENCES Businesses(business_id),
     ADD FOREIGN KEY (user_id) REFERENCES Users(user_id);
 
