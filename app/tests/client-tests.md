@@ -1,5 +1,3 @@
-// server
-
 // client
 def test_create_user(first_name, last_name):
     if not first_name or last_name:

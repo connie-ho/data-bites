@@ -46,6 +46,8 @@ def user(user_id):
             cursor = mysql.connection.cursor()
             cursor.execute("INSERT INTO User_Friends(user_id, friend_id) VALUES(%s,%s)",(user_id, friend_id))
             mysql.connection.commit()
+            cursor.execute("INSERT INTO User_Friends(user_id, friend_id) VALUES(%s,%s)",(friend_id, user_id))
+            mysql.connection.commit()
             cursor.close()
             return redirect(f"/user/{friend_id}")
         except:
@@ -167,7 +169,7 @@ def search():
                         'avg_stars': row[2],
                         'review_count': row[3]
                     }
-                    
+
                     if 'categories' in businesses[row[0]]:
                         businesses[row[0]]['categories'].append(row[4])
                     else:
