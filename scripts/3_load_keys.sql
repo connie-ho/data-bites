@@ -9,6 +9,8 @@ ALTER TABLE Businesses
 
 select 'Alter Users' as '';
 ALTER TABLE Users 
+    DROP COLUMN review_count,
+    DROP COLUMN average_stars,
     ADD CONSTRAINT check_year_started CHECK(YEAR(yelping_since) >= 2004 AND YEAR(yelping_since) <= 2100);
 INSERT INTO Users (user_id, name, yelping_since)
 Values ('data_bites_guest_user', 'guest', NOW());

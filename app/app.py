@@ -308,12 +308,13 @@ def review(business_id):
     if request.method == "POST":
         review = request.form
         user_id = review['user_id']
-        stars = int(review['stars'])
+        stars = review['stars']
         text = review['text']
 
-        if not(user_id and stars and text):
+        if not(user_id or stars or text):
             return "Error: all fields must be filled"
 
+        stars = int(stars)
         review_id = ''.join(choice(string.ascii_uppercase + string.digits) for _ in range(22))
 
         # add the review

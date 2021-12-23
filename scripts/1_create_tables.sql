@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Tips;
 DROP TABLE IF EXISTS Tip_Compliments;
+DROP TABLE IF EXISTS User_Compliments;
 DROP TABLE IF EXISTS User_Friends;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS User_Elite;
@@ -45,11 +46,13 @@ CREATE TABLE Users (
     user_id char(22) NOT NULL,
     name varchar(35),
 	-- max is 32
+    review_count int DEFAULT 0,
     yelping_since datetime,
     useful int DEFAULT 0, -- same for all the tags
     funny int DEFAULT 0,
     cool int DEFAULT 0,
     fans int DEFAULT 0,
+    average_stars int DEFAULT 0,
     compliment_hot int DEFAULT 0,
     compliment_more int DEFAULT 0,
     compliment_profile int DEFAULT 0,
