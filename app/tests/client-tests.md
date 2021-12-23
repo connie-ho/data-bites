@@ -2,7 +2,7 @@
 def test_create_user(first_name, last_name):
     if not first_name or last_name:
         assert(display error)
-    
+
     submit.click()
     assert(user page displays with new user)
 
@@ -41,7 +41,7 @@ def test_add_tip(user_id, text):
     fill_tip_form(user_id, text) // date and business_id are handled on the backend
     assert(new tip displays)
 
-def test_like_review_tag(tag):
+def test_react_to_review(tag):
     click(tag) // user clicks a tag on a review
     assert(count on page increases by 1)
 

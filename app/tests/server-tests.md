@@ -36,12 +36,12 @@ def test_leave_tip(business_id, user_id, text):
     tip = leave_tip(business_id, user_id, text) // insert new tip; date is handled in the server function
     assert(business_id, user_id and date are unique) // creation of tip would fail otherwise
 
-def test_like_review_tag(review_id):
+def test_react_to_review(review_id):
     if not review_id:
         assert(error)
 
-    new_like_count = like_review_tag(review_id)
-    assert(like_count_previous + 1 == new_like_count)
+    new_count = react_to_review(review_id, tag)
+    assert(count_previous + 1 == new_count)
 
 def test_add_friend(user_id, friend_id):
     if not friend_id or user_id:
