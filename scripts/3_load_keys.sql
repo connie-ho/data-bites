@@ -161,4 +161,3 @@ ALTER TABLE Users DROP useful;
 ALTER TABLE Users DROP funny;
 ALTER TABLE Users DROP cool;
 ALTER TABLE Users DROP fans;
-ALTER TABLE Users DROP review_count;
